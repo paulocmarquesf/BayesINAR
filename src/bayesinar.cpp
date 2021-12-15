@@ -141,8 +141,8 @@ List posterior_inar(IntegerVector y,
         
         double sum_lambda = 0; 
         for (int t = 0; t < T-p; t++){
-                     sum_m = 0; for(int j = 0; j < p; j++)  sum_m += m(t, j); 
-                       sum_lambda += y[t+p] - sum_m; 
+            sum_m = 0; for(int j = 0; j < p; j++)  sum_m += m(t, j); 
+            sum_lambda += y[t+p] - sum_m; 
         }
         lambda[i] = R::rgamma(a_lambda + sum_lambda, 1 / (b_lambda + T- p));
         
@@ -153,7 +153,7 @@ List posterior_inar(IntegerVector y,
             }
         }
         
-         pb.increment();
+        pb.increment();
     }
     
     model["time_series"] = y; 
