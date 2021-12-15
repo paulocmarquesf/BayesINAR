@@ -72,7 +72,7 @@ int generalized_median(NumericVector pred) {
 int m_full_conditional_inar(double alpha, double lambda, int yt_i, int yt, IntegerVector m_minus_t) {        
     int M = m_minus_t.size(), sum_m_minus_t; 
     
-    sum_m_minus_t = 0; for(int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j]; 
+    sum_m_minus_t = 0; for (int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j]; 
     
     if (yt_i == 0 || yt - sum_m_minus_t == 0) return 0;
 
@@ -131,7 +131,7 @@ List posterior_inar(IntegerVector y,
     for (int i = 1; i < burn_in + N; i++) {
         if (Progress::check_abort()) return model;
 
-        for(int j = 0; j < p; j++) {
+        for (int j = 0; j < p; j++) {
             sum1[j] = 0; for (int t = 0; t < T-p; t++) sum1[j] += m(t, j);
             sum2[j] = 0; for (int t = 0; t < T-p; t++) sum2[j] += y[t + p - j - 1] - m(t, j);
             minus_alpha = minus_alpha_ij(alpha, i, j); 
@@ -141,12 +141,12 @@ List posterior_inar(IntegerVector y,
         
         double sum_lambda = 0; 
         for (int t = 0; t < T-p; t++){
-            sum_m = 0; for(int j = 0; j < p; j++)  sum_m += m(t, j); 
+            sum_m = 0; for (int j = 0; j < p; j++)  sum_m += m(t, j); 
             sum_lambda += y[t+p] - sum_m; 
         }
         lambda[i] = R::rgamma(a_lambda + sum_lambda, 1 / (b_lambda + T- p));
         
-        for(int j = 0; j < p; j++){
+        for (int j = 0; j < p; j++){
             for (int t = 0; t < T-p; t++) {
                 minus_m = minus_m_ij(m, t, j); 
                 m(t, j) = m_full_conditional_inar(alpha(i, j), lambda[i], y[t + p - j - 1], y[t + p], minus_m);
@@ -186,13 +186,13 @@ NumericVector predictive_distribution_inar(List model, int h, int replications) 
     IntegerVector y_prev(T + h); 
     IntegerVector yt_plus_h(N * replications); 
     
-    for(int i = 0; i < T; i++) y_prev[i] = y[i]; 
+    for (int i = 0; i < T; i++) y_prev[i] = y[i]; 
     
     for (int i = 0; i < N; i++) {
         for (int ell = 0; ell < replications; ell++) { 
             for (int j = 1; j <= h; j++) {
                 y_next = 0;
-                for(int r = 0; r < p; r++) y_next = R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1) );
+                for (int r = 0; r < p; r++) y_next = R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1) );
                 y_next += R::rpois(lambda[i]);
                 y_prev[T + j - 1] = y_next; 
             }
@@ -214,7 +214,7 @@ int m_full_conditional_adinar(double alpha, double theta, double lambda, int yt_
     int M = m_minus_t.size();
     
     int sum_m_minus_t = 0;
-    for(int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j]; 
+    for (int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j]; 
     
     if (yt_i == 0 || yt - sum_m_minus_t == 0) return 0;
 
@@ -280,7 +280,7 @@ List posterior_adinar(IntegerVector y,
     for (int i = 1; i < burn_in + N; i++) {
         if (Progress::check_abort()) return model;
         
-        for(int j = 0; j < p; j++) {
+        for (int j = 0; j < p; j++) {
             sum1[j] = 0; for (int t = 0; t < T-p; t++) sum1[j] += m(t, j);
             sum2[j] = 0; for (int t = 0; t < T-p; t++) sum2[j] += y[t + p - j - 1] - m(t, j);
             minus_alpha = minus_alpha_ij(alpha, i, j); 
@@ -291,7 +291,7 @@ List posterior_adinar(IntegerVector y,
         int sum_ut = 0;
         double sum_lambda = 0, sum_theta = 0;
         for (int t = 0; t < T - p; t++) {
-            sum_m = 0; for(int j = 0; j < p; j++)  sum_m += m(t, j); 
+            sum_m = 0; for (int j = 0; j < p; j++)  sum_m += m(t, j); 
             double w_geo = exp(log(w[i-1]) + log(theta[i-1]) + (y[t + p] - sum_m)*log(1 - theta[i-1]));
             double w_poi = exp(log(1 - w[i-1]) - lambda[i-1] + (y[t + p] - sum_m)*log(lambda[i-1]) - lfactorial(y[t + p] - sum_m));
             double pr_ut_equal_one = w_geo / (w_geo + w_poi);
@@ -305,7 +305,7 @@ List posterior_adinar(IntegerVector y,
         lambda[i] = R::rgamma(a_lambda + sum_lambda, 1 / (b_lambda + T - p - sum_ut));
         w[i] = R::rbeta(a_w + sum_ut, b_w + T - p - sum_ut);
         
-        for(int j = 0; j < p; j++){
+        for (int j = 0; j < p; j++){
             for (int t = 0; t < T - p; t++) {
                 minus_m = minus_m_ij(m, t, j); 
                 m(t, j) = m_full_conditional_adinar(alpha(i, j), theta[i], lambda[i], y[t + p - j - 1], y[t + p], u(i, t), minus_m);
@@ -352,13 +352,13 @@ NumericVector predictive_distribution_adinar(List model, int h, int replications
     IntegerVector y_prev(T + h); 
     IntegerVector yt_plus_h(N * replications); 
     
-    for(int i = 0; i < T; i++) y_prev[i] = y[i]; 
+    for (int i = 0; i < T; i++) y_prev[i] = y[i]; 
     
     for (int i = 0; i < N; i++) {
         for (int ell = 0; ell < replications; ell++) { 
             for (int j = 1; j <= h; j++) {
                 y_next = 0;
-                for(int r = 0; r < p; r++) y_next = R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1) );
+                for (int r = 0; r < p; r++) y_next = R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1) );
                 double u = R::runif(0, 1);
                 if (u <= w[i]) y_next += R::rgeom(theta[i]);
                 else           y_next += R::rpois(lambda[i]);
@@ -381,7 +381,7 @@ NumericVector predictive_distribution_adinar(List model, int h, int replications
 int m_full_conditional_dpinar(double alpha, double lambda, int yt_i, int yt, IntegerVector m_minus_t) {
     int M = m_minus_t.size(), sum_m_minus_t;
 
-    sum_m_minus_t = 0; for(int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j];
+    sum_m_minus_t = 0; for (int j = 0; j < M; j++) sum_m_minus_t += m_minus_t[j];
 
     if (yt_i == 0 || yt - sum_m_minus_t == 0) return 0;
 
@@ -518,7 +518,7 @@ List posterior_dpinar(IntegerVector y,
                 if (s < t) minus_lambda_t[s] = lambda(i, s);
                 else if (s > t) minus_lambda_t[s - 1] = lambda(i - 1, s);
             }
-            sum_m = 0; for(int j = 0; j < p; j++)  sum_m += m(t, j);
+            sum_m = 0; for (int j = 0; j < p; j++)  sum_m += m(t, j);
             lambda(i, t) = lambda_full_conditional_dpinar(minus_lambda_t, a0, b0, tau[i - 1], y[t + p], sum_m);
         }
 
@@ -599,13 +599,13 @@ NumericVector predictive_distribution_dpinar(List model, int h, int replications
         }
     }
 
-    for(int j = 0; j < T; j++) y_prev[j] = y[j];
+    for (int j = 0; j < T; j++) y_prev[j] = y[j];
 
     for (int i = 0; i < N; i++) {
         for (int ell = 0; ell < replications; ell++) {
             for (int j = 1; j <= h; j++) {
                 y_next = 0;
-                for(int r = 0; r < p; r++) y_next += R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1));
+                for (int r = 0; r < p; r++) y_next += R::rbinom(y_prev[T - p - 1 + r + j], alpha(i, p - r - 1));
                 y_next += R::rpois(lambda(i, T - p - 1 + j));
                 y_prev[T + j - 1] = y_next;
             }
