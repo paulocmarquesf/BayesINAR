@@ -1,0 +1,13 @@
+Package: BayesINAR
+Type: Package
+Title: Bayesian INAR models
+Version: 1.0
+Date: 2021-12-15
+Author: Helton Graziadei, Paulo C. Marques F. and Hedibert F. Lopes
+Maintainer: Paulo C. Marques F. <PauloCMF1@insper.edu.br>
+Description: Generalized Bayesian models for time series of counts, 
+    with functions for training and prediction.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.2)
+LinkingTo: Rcpp, RcppArmadillo, RcppProgress
+RoxygenNote: 7.1.2
