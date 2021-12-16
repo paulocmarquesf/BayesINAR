@@ -6,7 +6,7 @@ Bayesian predictive models for time series of counts.
 "_Bayesian generalizations of the integer-valued autoregressive model_."
 Journal of Applied Statistics, v. 1, p. 1-21, 2020.
 
-```
+```r
 devtools::install_github("paulocmarquesf/BayesINAR")
 
 library(BayesINAR)
