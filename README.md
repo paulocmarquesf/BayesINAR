@@ -1,8 +1,8 @@
 # BayesINAR
 
-Bayesian predictive models for time series of counts
+Bayesian predictive models for time series of counts.
 
-Paulo C. Marques F., Helton Graziadei and Hedibert Lopes.
+> Paulo C. Marques F., Helton Graziadei and Hedibert Lopes.
 "_Bayesian generalizations of the integer-valued autoregressive model_."
 Journal of Applied Statistics, v. 1, p. 1-21, 2020.
 
