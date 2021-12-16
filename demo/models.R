@@ -2,7 +2,6 @@
 
 library(BayesINAR)
 
-data(Pittsburgh)
 y <- Pittsburgh$Area_51
 
 model <- inar(y)
