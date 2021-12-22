@@ -14,9 +14,9 @@
 %   package, including the most important functions.
 % }
 \author{
-  Helton Graziadei, Paulo C. Marques F. and Hedibert F. Lopes
-
-  Maintainer: Paulo C. Marques F. <PauloCMF1@insper.edu.br>
+  \packageAuthor{BayesINAR}
+  
+  Maintainer: \packageMaintainer{BayesINAR}
 }
 \references{
   Paulo C. Marques F., Helton Graziadei and Hedibert Lopes.
