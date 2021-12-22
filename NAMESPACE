@@ -1,4 +1,4 @@
-useDynLib(BayesINAR, .registration=TRUE)
+useDynLib(BayesINAR, .registration = TRUE)
 importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
 S3method(predict, adinar)
