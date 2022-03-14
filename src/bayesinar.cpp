@@ -92,11 +92,11 @@ int m_full_conditional_inar(double alpha, double lambda, int yt_i, int yt, Integ
         total += weights[m_t];
     }
 
-  double u = R::runif(0, 1);
+    double u = R::runif(0, 1);
 
-  for (m_t = 0; m_t <= min(yt_i, yt - sum_m_minus_t); m_t++) {
-      if ((u -= (weights[m_t] / total)) <= 0) return m_t;
-  }
+    for (m_t = 0; m_t <= min(yt_i, yt - sum_m_minus_t); m_t++) {
+        if ((u -= (weights[m_t] / total)) <= 0) return m_t;
+    }
 }
 
 // [[Rcpp::export(.posterior_inar)]]
