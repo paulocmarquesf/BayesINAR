@@ -1,14 +1,8 @@
-### Bayesian generalizations of the integer-valued autoregressive model
+## Bayesian generalizations of the integer-valued autoregressive model
 
 > Paulo C. Marques F., Helton Graziadei and Hedibert F. Lopes
 
-<<<<<<< HEAD
-> Paulo C. Marques F., Helton Graziadei and Hedibert F. Lopes.
-"_Bayesian generalizations of the integer-valued autoregressive model_."
-Journal of Applied Statistics, v. 1, p. 1-21, 2020. https://doi.org/10.1080/02664763.2020.1812544
-=======
 > https://doi.org/10.1080/02664763.2020.1812544
->>>>>>> c448ab5 (...)
 
 ```r
 devtools::install_github("paulocmarquesf/BayesINAR")
