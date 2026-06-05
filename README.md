@@ -1,5 +1,5 @@
 ```bibtex
-@article{marques2022,
+@article{marquesf2022,
   author = {Paulo C. {Marques F.} and Helton Graziadei and Hedibert F. Lopes},
   title = {Bayesian generalizations of the integer-valued autoregressive model},
   journal = {Journal of Applied Statistics},
